@@ -3,3 +3,13 @@ bin
 appsettings.json
 *.db
 *.vs
+
+Migration
+/Migration
+/Tmall.Migration/obj/
+/Tmall.Migration/obj/Debug/netcoreapp3.1/
+/Tmall.Migration/bin/
+/Tmall.Migration/bin/
+/Tmall.Migration/obj/
+
+
