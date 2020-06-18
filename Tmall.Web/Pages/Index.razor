@@ -1,0 +1,27 @@
+﻿@page "/"
+@inherits ProductBase
+
+    @*https://www.syncfusion.com/tutorial-videos/blazor/pivot-table*@
+    <h1>Product List</h1>
+
+    @if (Products == null)
+    {
+        <div class=""></div>
+    }
+
+    else
+    {
+        <h3>Selected Product Counter @SelectedProductsCount</h3>
+
+        <input type="checkbox" id="SFooter" @bind="ShowFooter" />
+        <label for="SFooter">ShowFooter</label>
+
+        <div class="card-deck">
+
+            @foreach (var product in Products)
+            {
+                <DisplayProducts Product="product" ShowFooter="ShowFooter" OnProductSelection="ProductSelectionChanged" />
+            }
+
+        </div>
+    }

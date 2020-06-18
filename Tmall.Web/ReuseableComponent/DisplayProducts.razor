@@ -1,0 +1,29 @@
+﻿@inherits DisplayProductsBase
+
+<div class="card m-3" style="min-width: 18rem; max-width: 30.5%;">
+                
+    <div class="card-header">
+      <input type="checkbox" @onchange="@CheckBoxChanged"/>
+        <h3>@Product.Name</h3>
+    </div>
+                
+    <div class="card-body">
+        <h3> @Product.Description</h3>
+    </div>
+
+    @*<img class="card-img-top imageThumbnail" src="@product.PictureUrl"/>*@
+
+    @if (ShowFooter)
+    {
+        <div class="card-footer text-center">
+                    
+            @*<a href="/ProductDeatils/@product.Id" class="btn btn-primary m-1">View</a>*@
+                   
+            <a href="@($"ProductDeatils/{Product.Id}")"
+               class="btn btn-primary m-1">View</a>
+            <a href="@($"editproduct/{Product.Id}")" class="btn btn-primary m-1">Edit</a>
+
+            <a href="#" class="btn btn-danger m-1">Delete</a>
+        </div>
+    }
+</div>
