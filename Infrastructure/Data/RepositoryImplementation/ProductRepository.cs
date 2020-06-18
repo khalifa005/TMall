@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -31,6 +32,38 @@ namespace Infrastructure.Data.RepositoryImplementation
                 .Include(p => p.ProductBrand)
                 .Include(p => p.ProductType)
                 .FirstOrDefaultAsync(p=>p.Id == id);
+        }
+
+        public async Task<Product> UpdateProductByIdAsync(Product Currentproduct)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == Currentproduct.Id);
+            product.Name = Currentproduct.Name;
+            product.Description= Currentproduct.Description;
+            product.Price = Currentproduct.Price;
+            product.PictureUrl= Currentproduct.PictureUrl;
+            product.ProductBrandId = Currentproduct.ProductBrandId;
+            product.ProductTypeId = Currentproduct.ProductTypeId;
+
+            _context.SaveChanges();
+            return product;
+        }
+
+        public async Task<Product> CreateProductAsync(Product product)
+        {
+            await _context.Products.AddAsync(product);
+                  _context.SaveChanges();
+            
+             return product;
+        }
+
+        public void DeleteProductByIdAsync(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            
+            if(product == null)return;
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
         }
 
         public async Task<IReadOnlyList<ProductBrand>> GetBrandsAsync()
