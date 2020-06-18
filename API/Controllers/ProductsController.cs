@@ -40,7 +40,28 @@ namespace API.Controllers
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetTypes()
         {
-            return Ok(await _productRepository.GetBrandsAsync());
+            return Ok(await _productRepository.GetTypesAsync());
+        }
+
+        [HttpPost("add")]
+        public async Task<ActionResult<Product>> AddProduct(Product product)
+        {
+            var result= await _productRepository.CreateProductAsync(product);
+            return Ok(result);
+        }
+
+        [HttpPut("edit")]
+        public async Task<ActionResult<Product>> UpdateProduct(Product product)
+        {
+            var result= await _productRepository.UpdateProductByIdAsync(product);
+            return Ok(result);
+        }
+
+        [HttpDelete("delete")]
+        public ActionResult DeleteProduct(int id)
+        {
+            _productRepository.DeleteProductByIdAsync(id);
+            return Ok();
         }
     }
 } 
