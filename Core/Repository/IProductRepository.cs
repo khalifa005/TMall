@@ -11,6 +11,10 @@ namespace Core.Repository
         Task<IReadOnlyList<Product>> GetProductsAsync();
         Task<Product> GetProductByIdAsync(int id);
 
+        Task<Product> UpdateProductByIdAsync(Product product);
+        Task<Product> CreateProductAsync(Product product);
+        void DeleteProductByIdAsync(int id);
+
         Task<IReadOnlyList<ProductBrand>> GetBrandsAsync();
         Task<IReadOnlyList<ProductType>> GetTypesAsync();
     }
