@@ -17,7 +17,19 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 100,
+                Name = "TestKhalifa",
+                Description = "tttttt",
+                PictureUrl= "images/logo.png",
+                ProductBrandId = 1,
+                ProductTypeId = 1,
+                Price = 100
+            });
         }
     }
 }
