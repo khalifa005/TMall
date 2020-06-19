@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Repository;
+using Core.Specification;
+using Infrastructure.Data.SpecificationEvaluator;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data.RepositoryImplementation
@@ -25,5 +28,22 @@ namespace Infrastructure.Data.RepositoryImplementation
         {
             return await _context.Set<T>().FindAsync(id);
         }
+
+        public async Task<T> GetEntityWithSpec(ISpecification<T> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> GetListOfEntitiesWithSpectAsync(ISpecification<T> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> specification)
+        {
+            return  SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
+        }
+
+      
     }
 }
