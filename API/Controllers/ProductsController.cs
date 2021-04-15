@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.MediatorHandlers.ProductHandlers;
 using Core.Entities;
 using Core.Repository;
+using Core.Specification.SpecificationCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepository;
         private readonly IGenericRepository<ProductType> _productTypeRepository;
@@ -24,10 +26,17 @@ namespace API.Controllers
             _productBrandRepository = productBrandRepository;
         }
 
+        [HttpGet("test/{id}")]
+        public async Task<ActionResult<GetProduct.Response>> GetProductByIdMediator(int id)
+        {
+            return await Mediator.Send(new GetProduct.Request { Id = id });
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var products = await _productRepository.GetAllAsync();
+            var spect = new ProductWithBrandAndTypeSpecification();
+            var products = await _productRepository.GetListOfEntitiesWithSpectAsync(spect);
 
             return Ok(products);
         }
@@ -35,8 +44,11 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductById(int id)
         {
-            return await _productRepository.GetByIdAsync(id);
+            var spec = new ProductWithBrandAndTypeSpecification(id);
+            return await _productRepository.GetEntityWithSpecAsync(spec);
         }
+
+       
 
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetBrands()

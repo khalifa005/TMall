@@ -9,7 +9,8 @@ namespace Tmall.Migration._100
         {
             Create.Table(Tables.Role)
                 .IdSmall()
-                .MultiText("name")
+                .MultiText("Name")
+                .Bool("IsTest", true)
                 .IsActive();
         }
     }

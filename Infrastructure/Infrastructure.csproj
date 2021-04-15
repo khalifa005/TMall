@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210314000310_test.cs" />
+    <Compile Remove="Migrations\20210314000310_test.Designer.cs" />
+    <Compile Remove="Migrations\20210314000615_testAgain.cs" />
+    <Compile Remove="Migrations\20210314000615_testAgain.Designer.cs" />
+    <Compile Remove="Migrations\20210412002119_alter descrption .cs" />
+    <Compile Remove="Migrations\20210412002119_alter descrption .Designer.cs" />
+    <Compile Remove="Migrations\20210412002403_alter descrption .cs" />
+    <Compile Remove="Migrations\20210412002403_alter descrption .Designer.cs" />
+    <Compile Remove="Migrations\20210412003237_alter descrption in product.cs" />
+    <Compile Remove="Migrations\20210412003237_alter descrption in product.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">

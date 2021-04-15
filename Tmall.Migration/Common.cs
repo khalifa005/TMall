@@ -47,7 +47,7 @@ namespace Tmall.Migration
     public static class FluentMigratorExtensions
     {
         public static ICreateTableColumnOptionOrWithColumnSyntax AutoId(this ICreateTableWithColumnOrSchemaSyntax self) =>
-            self.WithColumn("id").AsCustom(PostgresSpecificType.Identity).NotNullable().PrimaryKey();
+            self.WithColumn("Id").AsInt16().NotNullable().PrimaryKey();
 
         internal static ICreateTableColumnOptionOrWithColumnSyntax AutoIdSmall(this ICreateTableWithColumnOrSchemaSyntax self) =>
             self.WithColumn("id").AsCustom(PostgresSpecificType.IdentitySmall).NotNullable().PrimaryKey();
@@ -133,9 +133,9 @@ namespace Tmall.Migration
             ICreateTableColumnOptionOrWithColumnSyntax col;
 
             if (isNullable)
-                col = self.WithColumn(name).AsInt16().Nullable().ForeignKey(foreignTable, "id");
+                col = self.WithColumn(name).AsInt16().Nullable().ForeignKey(foreignTable, "Id");
             else
-                col = self.WithColumn(name).AsInt16().NotNullable().ForeignKey(foreignTable, "id");
+                col = self.WithColumn(name).AsInt16().NotNullable().ForeignKey(foreignTable, "Id");
 
             if (isPK)
                 col.PrimaryKey();

@@ -56,9 +56,10 @@ namespace Tmall.Migration
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     // Add Postgres support to FluentMigrator
-                    .AddPostgres()
+                    //.AddPostgres()
+                    .AddSqlServer()
                     // Set the connection string
-                    .WithGlobalConnectionString(configuration["connectionString"])
+                    .WithGlobalConnectionString(configuration["SqlServerConnection"])
                     // Define the assembly containing the migrations
                     .ScanIn(typeof(_0001_RoleTable).Assembly).For.Migrations())
                 // Enable logging to console in the FluentMigrator way

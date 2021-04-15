@@ -29,7 +29,7 @@ namespace Infrastructure.Data.RepositoryImplementation
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> GetEntityWithSpec(ISpecification<T> specification)
+        public async Task<T> GetEntityWithSpecAsync(ISpecification<T> specification)
         {
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }

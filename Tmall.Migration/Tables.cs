@@ -4,7 +4,7 @@
     {
         #region Identity
 
-        public const string User = "user";
+        public const string User = "User";
         public const string Role = "role";
 
         #endregion Identity
