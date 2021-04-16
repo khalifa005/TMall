@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class LanguageController : ControllerBase
     {
         private readonly IStringLocalizer<LanguageController> _localizer;
@@ -20,8 +20,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var guid = Guid.NewGuid();
-            return Ok(_localizer["RandomGUID"].Value);
+            return Ok(_localizer["hi"].Value);
         }
     }
 }
