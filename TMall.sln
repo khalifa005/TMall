@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Khalifa.Framework", "Khalif
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{681BB030-696B-4E53-8A42-43E77312B974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.MVC", "Web.MVC\Web.MVC.csproj", "{65AF3064-ED5E-4BFD-80A2-A4550279338D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.MVC", "Web.MVC\Web.MVC.csproj", "{65AF3064-ED5E-4BFD-80A2-A4550279338D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

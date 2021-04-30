@@ -47,6 +47,8 @@ namespace Web.MVC
                 options.DefaultRequestCulture = new RequestCulture("en");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders.Clear();
+                options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
