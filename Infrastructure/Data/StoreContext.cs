@@ -15,26 +15,26 @@ namespace Infrastructure.Data
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<TestKhalifaTable> khalifas { get; set; }
 
+        //override one of the method inside db context 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
+            //to look for the additional configuration 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
 
-            modelBuilder.Entity<Product>()
-        .Property(b => b.Description)
-        .HasMaxLength(500);
-
-            //modelBuilder.Entity<Product>().HasData(new Product()
-            //{
-            //    Id = 100,
-            //    Name = "TestKhalifa",
-            //    Description = "tttttt",
-            //    PictureUrl= "images/logo.png",
-            //    ProductBrandId = 1,
-            //    ProductTypeId = 1,
-            //    Price = 100
-            //});
+            modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = 100,
+                Name = "TestKhalifa",
+                Description = "tttttt",
+                PictureUrl = "images/logo.png",
+                ProductBrandId = 1,
+                ProductTypeId = 1,
+                Price = 100
+            });
         }
     }
 }
