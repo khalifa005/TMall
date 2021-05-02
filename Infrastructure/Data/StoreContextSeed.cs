@@ -18,6 +18,7 @@ namespace Infrastructure.Data
             {
                 if (!context.ProductBrands.Any())
                 {
+                    //../ because this will run from the program class
                     var brandsData =
                         File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
 

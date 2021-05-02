@@ -26,7 +26,7 @@ namespace API.Controllers
             _productBrandRepository = productBrandRepository;
         }
 
-        [HttpGet("test/{id}")]
+        [HttpGet("test/mediator/{id}")]
         public async Task<ActionResult<GetProduct.Response>> GetProductByIdMediator(int id)
         {
             return await Mediator.Send(new GetProduct.Request { Id = id });
@@ -53,6 +53,7 @@ namespace API.Controllers
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetBrands()
         {
+            //cann't return IReadOnlyList directlly so we meed to wrap it with ok response
             return Ok(await _productBrandRepository.GetAllAsync());
         }
 

@@ -1,20 +1,16 @@
-﻿using FluentValidation;
-using Infrastructure.Data;
+﻿using Infrastructure.Data;
 using Khalifa.Framework;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Entities;
 
 namespace Application.MediatorHandlers.ProductHandlers
 {
-
-    public class Getproducts
+    public class GetproductTypess
     {
         public class Request : IRequest<Response>
         {
@@ -26,11 +22,11 @@ namespace Application.MediatorHandlers.ProductHandlers
             {
 
             }
-            public IReadOnlyList<Product> Products { get; set; }
+            public IReadOnlyList<ProductType> Types { get; set; }
 
-            public Response(IReadOnlyList<Product> products)
+            public Response(IReadOnlyList<ProductType> types)
             {
-                Products = products;
+                Types = types;
                 StatusCode = (int)HttpStatusCode.OK;
             }
         }
@@ -47,9 +43,7 @@ namespace Application.MediatorHandlers.ProductHandlers
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var proEntities = await _context.Products
-                .Include(p => p.ProductBrand)
-                .Include(p => p.ProductType)
+                var proEntities = await _context.ProductTypes
                 .ToListAsync(cancellationToken);
 
                 return new Response(proEntities);
