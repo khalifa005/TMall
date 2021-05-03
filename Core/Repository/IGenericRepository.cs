@@ -5,6 +5,9 @@ using Core.Specification;
 
 namespace Core.Repository
 {
+    //where T : BaseEntity constrain to be used only with classes that derive from base entity
+    //where T : class constrain to be used only with any classes 
+    //EX:so we pass IGenericRepository<product> 
     public interface IGenericRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(int id);

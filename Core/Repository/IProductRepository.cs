@@ -8,6 +8,7 @@ namespace Core.Repository
 {
     public interface IProductRepository
     {
+        //replaced by generic repo
         Task<IReadOnlyList<Product>> GetProductsAsync();
         Task<Product> GetProductByIdAsync(int id);
 

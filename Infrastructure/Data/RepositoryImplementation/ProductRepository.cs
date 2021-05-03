@@ -11,6 +11,8 @@ namespace Infrastructure.Data.RepositoryImplementation
 {
     public class ProductRepository : IProductRepository
     {
+        //replaced by generic repo
+
         private readonly StoreContext _context;
 
         public ProductRepository(StoreContext context)

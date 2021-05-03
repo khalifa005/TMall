@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Khalifa.Framework.CommonProperties
 {
-    public abstract class TrackAddEditChanges
+    public abstract class TrackEntityChanges
     {
         public DateTime? CreatedAt { get; set; }
         [Required]
@@ -16,7 +16,7 @@ namespace Khalifa.Framework.CommonProperties
         public string LastModifiedBy { get; set; }
     }
 
-    public abstract class Lookup : TrackAddEditChanges
+    public abstract class Lookup : TrackEntityChanges
     {
         public int Id { get; set; }
 
@@ -40,6 +40,13 @@ namespace Khalifa.Framework.CommonProperties
         public string NameEnglish { get; set; }
     }
 
+    public abstract class MultiDescription
+    {
+        public string DescriptionArabic { get; set; }
+        [Required]
+        public string DescriptionEnglish { get; set; }
+    }
+
     public abstract class MultiStringWithDescription : MultiString
     {
         public string DescriptionArabic { get; set; }
@@ -47,11 +54,6 @@ namespace Khalifa.Framework.CommonProperties
         public string DescriptionEnglish { get; set; }
     }
 
-    public abstract class MultiDescription
-    {
-        public string DescriptionArabic { get; set; }
-        [Required]
-        public string DescriptionEnglish { get; set; }
-    }
+    
 
 }

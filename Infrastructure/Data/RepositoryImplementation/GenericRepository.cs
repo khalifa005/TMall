@@ -29,6 +29,14 @@ namespace Infrastructure.Data.RepositoryImplementation
             return await _context.Set<T>().FindAsync(id);
         }
 
+
+        //above is before using specification pattern we can't do any filtering or sorting or get related data
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> specification)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
+        }
+
         public async Task<T> GetEntityWithSpecAsync(ISpecification<T> specification)
         {
             return await ApplySpecification(specification).FirstOrDefaultAsync();
@@ -39,10 +47,7 @@ namespace Infrastructure.Data.RepositoryImplementation
             return await ApplySpecification(specification).ToListAsync();
         }
 
-        private IQueryable<T> ApplySpecification(ISpecification<T> specification)
-        {
-            return  SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
-        }
+        
 
       
     }

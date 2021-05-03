@@ -21,7 +21,7 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //to look for the additional configuration 
+            //to look for the additional configuration for each migration 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             
 

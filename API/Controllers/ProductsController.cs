@@ -12,6 +12,11 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : BaseApiController
     {
+        //IProductrepo is replaced by teh generic repo
+
+        //so rather than injecting one repo IProductrepo now we are injecting 3 repo so later we will
+        //use unit of work pattern  used to solve this constructor injection
+
         private readonly IGenericRepository<Product> _productRepository;
         private readonly IGenericRepository<ProductType> _productTypeRepository;
         private readonly IGenericRepository<ProductBrand> _productBrandRepository;
