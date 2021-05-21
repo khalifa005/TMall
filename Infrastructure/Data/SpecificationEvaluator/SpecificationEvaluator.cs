@@ -13,11 +13,14 @@ namespace Infrastructure.Data.SpecificationEvaluator
     {
         public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> spec)
         {
+            //6 spec
+
             var query = inputQuery;
 
             if (spec.Criteria != null)
-                query = query.Where(spec.Criteria);
+                query = query.Where(spec.Criteria); //  spec.Criteria is p=> p.ProductId == id
 
+            //take more multiple include expression then aggregate them and pass them into our query
             query = spec.Includes.Aggregate(query, (entities, expression) => entities.Include(expression));
 
             return query;

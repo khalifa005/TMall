@@ -7,6 +7,17 @@ namespace Core.Specification
 {
     public class BaseSpecification<T> : ISpecification<T>
     {
+        /* 
+         all of the work here is just to replace this includes 
+
+                _context.Products
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+
+         */
+
+        //related to configuration
+
         public BaseSpecification()
         {
             

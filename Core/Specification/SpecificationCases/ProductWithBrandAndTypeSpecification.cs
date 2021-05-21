@@ -16,6 +16,7 @@ namespace Core.Specification.SpecificationCases
         public ProductWithBrandAndTypeSpecification(int id)
         :base(x =>x.Id == id)
         {
+            //2 spec
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
         }

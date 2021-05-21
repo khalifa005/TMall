@@ -7,6 +7,9 @@ namespace Core.Specification
 {
     public interface ISpecification<T>
     {
+        //filtration and paging will be here 
+
+        //the criteria of the thing we need 
         Expression<Func<T, bool>> Criteria { get; }
 
         List<Expression<Func<T, object>>> Includes { get; }

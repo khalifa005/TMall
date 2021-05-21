@@ -34,11 +34,15 @@ namespace Infrastructure.Data.RepositoryImplementation
 
         private IQueryable<T> ApplySpecification(ISpecification<T> specification)
         {
+            //5 spec
+
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
         }
 
         public async Task<T> GetEntityWithSpecAsync(ISpecification<T> specification)
         {
+            //4 spec
+
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
