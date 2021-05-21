@@ -13,5 +13,9 @@ namespace Core.Specification
         Expression<Func<T, bool>> Criteria { get; }
 
         List<Expression<Func<T, object>>> Includes { get; }
+
+        ////to add then include
+        //List<string> IncludeStrings { get; }
+
     }
 }

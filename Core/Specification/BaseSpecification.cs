@@ -20,7 +20,7 @@ namespace Core.Specification
 
         public BaseSpecification()
         {
-            
+
         }
 
         public BaseSpecification(Expression<Func<T, bool>> criteria)
@@ -35,6 +35,14 @@ namespace Core.Specification
         {
             Includes.Add(includeExpression);
         }
+
+        //to add then include
+
+        //public List<string> IncludeStrings { get; } = new List<string>();
+        //protected void AddInclude(string includeString)
+        //{
+        //    IncludeStrings.Add(includeString);
+        //}
 
     }
 

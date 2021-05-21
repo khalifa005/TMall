@@ -23,6 +23,9 @@ namespace Infrastructure.Data.SpecificationEvaluator
             //take more multiple include expression then aggregate them and pass them into our query
             query = spec.Includes.Aggregate(query, (entities, expression) => entities.Include(expression));
 
+            //to add then include
+            //query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
+
             return query;
 
         }
