@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helper;
 using Application.MediatorHandlers.ProductHandlers;
 using Core.Repository;
 using Infrastructure.Data;
@@ -52,6 +53,9 @@ namespace API
                 options.UseSqlServer(_configuration.GetConnectionString("SqlServerConnection")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddAutoMapper(typeof(MappingProfiles));//define where the assembles
+
             services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddControllers().AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
@@ -82,6 +86,8 @@ namespace API
             #endregion
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
