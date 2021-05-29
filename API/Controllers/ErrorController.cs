@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 namespace API.Controllers
 {
     [Route("errors/{code}")]
+    [ApiExplorerSettings(IgnoreApi = true)] //this line is for to let swagger ignore documenting this endpoint
+   
     public class ErrorController : BaseApiController
     {
         //use the middleweare to redirect to this end point
