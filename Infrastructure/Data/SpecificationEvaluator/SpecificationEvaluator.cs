@@ -19,12 +19,22 @@ namespace Infrastructure.Data.SpecificationEvaluator
 
             if (spec.Criteria != null)
                 query = query.Where(spec.Criteria); //  spec.Criteria is p=> p.ProductId == id
+            
+            
+            if (spec.OrderBy != null)
+                query = query.OrderBy(spec.OrderBy); 
+            
+            
+            if (spec.OrderByDescending != null)
+                query = query.OrderByDescending(spec.OrderByDescending); 
+            
+            if (spec.IsPagingEnabled)
+                query = query.Skip(spec.Skip).Take(spec.Take); 
+
 
             //take more multiple include expression then aggregate them and pass them into our query
             query = spec.Includes.Aggregate(query, (entities, expression) => entities.Include(expression));
 
-            //to add then include
-            //query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
 
             return query;
 
