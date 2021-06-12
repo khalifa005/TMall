@@ -17,5 +17,7 @@ namespace Core.Repository
         Task<T> GetEntityWithSpecAsync(ISpecification<T> specification);
 
         Task<IReadOnlyList<T>> GetListOfEntitiesWithSpectAsync(ISpecification<T> specification);
+
+        Task<int> CountAsync(ISpecification<T> specification);
     }
 }

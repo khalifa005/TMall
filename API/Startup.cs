@@ -6,6 +6,7 @@ using API.Errors;
 using API.Extension;
 using API.Helper;
 using API.Middleware;
+using Application.AppMappingProfiles;
 using Application.MediatorHandlers.ProductHandlers;
 using Core.Repository;
 using Infrastructure.Data;
@@ -46,6 +47,7 @@ namespace API
 
 
             services.AddAutoMapper(typeof(MappingProfiles));//define where the assembles
+            services.AddAutoMapper(typeof(AppProfile));//define where the assembles
 
 
             services.AddControllers().AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
@@ -54,7 +56,13 @@ namespace API
             //here we extended the iService
            services.AddApplicationServices();
            services.AddSwaggerDocumentation();
-
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:44398");
+                });
+            });
 
         }
 
@@ -77,6 +85,8 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

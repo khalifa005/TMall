@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
+using API.Helper;
 using Application.MediatorHandlers.ProductHandlers;
 using AutoMapper;
 using Core.Entities;
 using Core.Repository;
 using Core.Specification.SpecificationCases;
+using Khalifa.Framework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,22 +44,67 @@ namespace API.Controllers
         }
 
         [HttpGet("test/mediator/{id}")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
+
         public async Task<ActionResult<GetProduct.Response>> GetProductByIdMediator(int id)
         {
             return await Mediator.Send(new GetProduct.Request { Id = id });
         }
+        
+        
+
+        [HttpGet("mediator/with-paging")]
+        [ProducesResponseType(typeof(GetProductsWithPagining.Response), StatusCodes.Status200OK)]
+        public async Task<GetProductsWithPagining.Response> GetProductsMediatorWithPaging(string name, string sort, int brandId, CancellationToken cancellation)
+        {
+            var filterUI = ProductFilterUI.Default();
+
+            filterUI.BrandId = brandId > 0 ? brandId : Config.AllOptionValueShort;
+            filterUI.ProductName = name;
+
+            var filter = filterUI.GetFilter();
+
+            var sorter = ProductSorter.ByCreateDateDesc();
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "priceAsc":
+                        sorter = ProductSorter.ByPricrAsc();
+                        break;
+
+                    case "priceDesc":
+                        sorter = ProductSorter.ByPricrDesc();
+                        break;
+
+                    default:
+                        sorter = ProductSorter.ByCreateDateDesc();
+                        break;
+                }
+            }
+
+            return await Mediator.Send(new GetProductsWithPagining.Request(filter, sorter, Page: 1, PageSize: 2), cancellation);
+        }
+
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery]ProductSpectParams productParams) //[FromQuery] because we change it to object it goes and look fot it from the body and http get doesn't have a body
         {
-            var spect = new ProductWithBrandAndTypeSpecification();
+            var spect = new ProductWithBrandAndTypeSpecification(productParams);
+
+            var countSpec = new ProductWithFilterForCountSpecification(productParams);
+
+            var totalItems = await _productRepository.CountAsync(countSpec);
 
             var products = await _productRepository.GetListOfEntitiesWithSpectAsync(spect);
 
+            var data =_mapper.Map<IReadOnlyList<Product>,
+                IReadOnlyList<ProductDto>>(products);
+
             //return products.Select(product => new ProductDto(product)).ToList();
-            return Ok(
-                _mapper.Map<IReadOnlyList<Product>,
-                IReadOnlyList<ProductDto>>(products));
+            return Ok(new Pagination<ProductDto>
+                (productParams.PageIndex, productParams.PageSize, totalItems, data));
             
         }
 
@@ -98,18 +146,6 @@ namespace API.Controllers
         //    return Ok(result);
         //}
 
-        //[HttpPut("edit")]
-        //public async Task<ActionResult<Product>> UpdateProduct(Product product)
-        //{
-        //    var result= await _productRepository.UpdateProductByIdAsync(product);
-        //    return Ok(result);
-        //}
-
-        //[HttpDelete("delete")]
-        //public ActionResult DeleteProduct(int id)
-        //{
-        //    _productRepository.DeleteProductByIdAsync(id);
-        //    return Ok();
-        //}
+       
     }
 } 
