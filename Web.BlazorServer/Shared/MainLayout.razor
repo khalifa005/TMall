@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <span class="pr-2">site language</span><ChooseLanguage />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+
+@*Layout
+
+In ASP.NET Web Forms apps, a common page layout is handled using master pages (Site.Master). In Blazor apps, the page layout is handled using layout components (Shared/MainLayout.razor). Layout components will be discussed in more detail in Page, routing, and layouts section.*@

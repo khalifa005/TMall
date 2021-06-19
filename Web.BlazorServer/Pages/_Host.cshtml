@@ -1,0 +1,71 @@
+﻿@page "/"
+@namespace Web.BlazorServer.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html dir="@Direction()" lang="@Lang()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web.BlazorServer</title>
+    <base href="~/" />
+
+    @if (Direction() == "ltr")
+    {
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="css/bootstrap/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    }
+    else
+    {
+        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+    }
+
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="Web.BlazorServer.styles.css" rel="stylesheet" />
+</head>
+<body dir="@Direction()">
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
+
+@functions{
+
+    string Direction()
+    {
+        var selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+
+        if (selectedCulture.Contains("ar"))
+            return "rtl";
+        else
+            return "ltr";
+    }
+
+    string Lang()
+    {
+        var selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+        return selectedCulture;
+    }
+}
