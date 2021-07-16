@@ -1,0 +1,68 @@
+@page "/"
+@namespace Web.BlazorSyncfusion.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html dir="@Direction()" lang="@Lang()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web.BlazorSyncfusion</title>
+    <base href="~/" />
+    @if (Direction() == "ltr")
+    {
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+
+    }
+    else
+    {
+        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+    }
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="Web.BlazorSyncfusion.styles.css" rel="stylesheet" />
+    <link href="css/syncfusion-blazor-icons.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="_content/Syncfusion.Blazor.Themes/bootstrap4.css" />
+
+    <script src="~/scripts/lodash.min.js"></script>
+</head>
+<body dir="@Direction()">
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
+
+@functions{
+
+    string Lang()
+    {
+        var selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+        return selectedCulture;
+    }
+
+    string Direction()
+    {
+        var selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+
+        if (selectedCulture.Contains("ar"))
+            return "rtl";
+        else
+            return "ltr";
+    }
+}

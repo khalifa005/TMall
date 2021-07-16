@@ -1,0 +1,73 @@
+@page "/sidebar-features"
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+<h2>Sidebar</h2>
+<br/>
+<div id = "ControlRegion">
+<SfSidebar @ref="leftSidebarInstance" Target="#ControlRegion" Type=SidebarType.Push Width="250px" @bind-IsOpen="LeftToggle">
+    <ChildContent>
+        <div style="text-align: center;" class="text-content" > Left Sidebar</div>
+    </ChildContent>
+</SfSidebar>
+<SfSidebar @ref="rightSidebarInstance" Target="#ControlRegion" Width="250px" Position=SidebarPosition.Right @bind-IsOpen="RightToggle">
+    <ChildContent>
+        <div style="text-align: center;" class="text-content" > Right Sidebar</div>
+    </ChildContent>
+</SfSidebar>
+<div id ="sidebar-content" style="text-align:center" class="text-content e-main-content">
+    <div>Main content</div>
+    <div>
+        <SfButton @onclick="ToggleLeftSidebar" IsToggle="true" IsPrimary="true">Left Toggle Sidebar</SfButton>
+    </div>
+    <div style="margin-top:10px">
+        <SfButton @onclick="ToggleRightSidebar" IsToggle="true" IsPrimary="true">Right Toggle Sidebar</SfButton>
+    </div>
+</div>
+</div>
+<br/>
+<div>
+  <h3>Selected Features:</h3>
+    <ul class="ulstyle">
+      <li class="list"> Sidebar Samples - Multiple</li>
+      <li class="list"> Theme - Bootstrap v4</li>
+    </ul>
+</div>
+<br/>
+<style>
+    .e-sidebar {
+        background-color: #f8f8f8;
+        color: black;
+    }
+    .text-content {
+        font-size: 1.5rem;
+        padding: 3rem;
+    }
+    #ControlRegion{
+        height: 60vh;
+    }
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+    .list {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    min-width: 220px;
+    }
+</style>
+@code {
+    SfSidebar leftSidebarInstance;
+    SfSidebar rightSidebarInstance;
+    public bool LeftToggle = false;
+    public bool RightToggle = false;
+    public void ToggleLeftSidebar()
+    {
+        LeftToggle = !LeftToggle;
+    }
+    public void ToggleRightSidebar()
+    {
+        RightToggle = !RightToggle;
+    }
+}

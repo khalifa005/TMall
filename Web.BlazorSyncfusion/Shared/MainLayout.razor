@@ -1,0 +1,61 @@
+@inherits LayoutComponentBase
+@using Syncfusion.Blazor;
+@using Syncfusion.Blazor.Navigations
+
+<div class="page">
+    <div style="position:fixed">
+        <NavMenu @ref="_navMenuRef" />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="https://www.syncfusion.com/blazor-components/" target="_blank">Blazor Components</a>
+            <a href="https://blazor.syncfusion.com/documentation/" target="_blank">User Guide</a>
+            <a href="http://blazor.syncfusion.com/" target="_blank">View Demos</a>
+            <CultureSwitcher />
+        </div>
+
+        <div class="content">
+            @Body
+        </div>
+    </div>
+</div>
+
+
+@code{
+    [Inject]
+    SyncfusionBlazorService SyncfusionService { get; set; }
+
+    public NavMenu _navMenuRef { get; set; } = new NavMenu();
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        switch (System.Globalization.CultureInfo.CurrentCulture.Name)
+        {
+            case "en-US":
+                {  //Set EnableRtl to all Syncfusion Blazor Components
+                    SyncfusionService.EnableRtl(false);
+                    _navMenuRef.Position = SidebarPosition.Left;
+                   // _navMenuRef.PositionChange(SidebarPosition.Left);
+                    _navMenuRef.Hamburgerclass = "e-icons menu default";
+                    _navMenuRef.Leftbtn = "Left";
+                    StateHasChanged();
+                };
+                break;
+            case "ar":
+                {
+                    //Set EnableRtl to all Syncfusion Blazor Components
+                    SyncfusionService.EnableRtl();
+                    _navMenuRef.Position = SidebarPosition.Right;
+                    //_navMenuRef.PositionChange(SidebarPosition.Right);
+                    _navMenuRef.Hamburgerclass = "e-icons menu default e-rtl";
+                    _navMenuRef.Leftbtn = "Right";
+                    StateHasChanged();
+                };
+                break;
+
+        }
+
+    }
+}
