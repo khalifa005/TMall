@@ -1,4 +1,4 @@
-﻿using API.Errors;
+using API.Errors;
 using Core.Repository;
 using Infrastructure.Data.RepositoryImplementation;
 using Microsoft.AspNetCore.Mvc;

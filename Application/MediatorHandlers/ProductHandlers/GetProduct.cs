@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Infrastructure.Data;
 using Khalifa.Framework;
 using MediatR;
@@ -13,6 +13,7 @@ using Core.Entities;
 
 namespace Application.MediatorHandlers.ProductHandlers
 {
+
    
     public class GetProduct
     {
@@ -25,7 +26,7 @@ namespace Application.MediatorHandlers.ProductHandlers
         {
             public Response()
             {
-
+                StatusCode = (int)HttpStatusCode.BadRequest;
             }
             public Product Product { get; set; }
 
@@ -53,7 +54,10 @@ namespace Application.MediatorHandlers.ProductHandlers
                 .Include(p => p.ProductType)
                 .FirstOrDefaultAsync(p => p.Id == request.Id);
                 
-                return new Response(proEntity);
+                if(proEntity is null)
+                   return new Response(proEntity);
+
+                    return new Response(proEntity);
             }
         }
     }

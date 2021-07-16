@@ -1,4 +1,4 @@
-﻿namespace Tmall.Migration
+namespace Tmall.Migration
 {
     public static class Tables
     {

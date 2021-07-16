@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Tmall.Migration._100

@@ -1,4 +1,4 @@
-﻿using Infrastructure.Data;
+using Infrastructure.Data;
 using Khalifa.Framework;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

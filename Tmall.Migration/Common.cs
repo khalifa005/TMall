@@ -1,4 +1,4 @@
-﻿using FluentMigrator.Builders.Alter.Table;
+using FluentMigrator.Builders.Alter.Table;
 using FluentMigrator.Builders.Create.Table;
 
 #pragma warning disable MappingGenerator // Implementation of mapping method can be generated.

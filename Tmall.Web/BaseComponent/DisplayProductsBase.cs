@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Core.Entities;
 using Microsoft.AspNetCore.Components;
 

@@ -1,4 +1,4 @@
-﻿using Khalifa.Framework.CommonProperties;
+using Khalifa.Framework.CommonProperties;
 using System;
 using System.Collections.Generic;
 using System.Text;

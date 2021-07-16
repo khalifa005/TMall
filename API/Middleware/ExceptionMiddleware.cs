@@ -1,4 +1,4 @@
-﻿using API.Errors;
+using API.Errors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
