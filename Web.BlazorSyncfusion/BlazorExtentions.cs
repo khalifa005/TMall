@@ -1,46 +1,38 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using System.Resources;
+using Khalifa.Framework;
+using Syncfusion.Blazor;
 
-namespace Application
+namespace Web.BlazorSyncfusion
 {
-
-    public enum SupportedLanguage
+    public class SyncfusionLocalizer : ISyncfusionStringLocalizer
     {
-        None,
-        Arabic,
-        English,
-        French
-    }
-
-    public static class SupportedLanguageExtensions
-    {
-        public static string Code(this SupportedLanguage self)
+        // To get the locale key from mapped resources file
+        public string GetText(string key)
         {
-            return self switch
-            {
-                SupportedLanguage.Arabic => "ar",
-                SupportedLanguage.English => "en-US",
-                _ => throw new ArgumentOutOfRangeException(),
-            };
+            return this.ResourceManager.GetString(key);
         }
 
-        public static SupportedLanguage ToSupportedLang(this string self)
+        // To access the resource file and get the exact value for locale key
+
+        public System.Resources.ResourceManager ResourceManager
         {
-            return self switch
+            get
             {
-                "ar" => SupportedLanguage.Arabic,
-                "en-US" => SupportedLanguage.English,
-                _ => throw new ArgumentOutOfRangeException(),
-            };
+                return Web.BlazorSyncfusion.Resources.SfResources.ResourceManager;
+            }
         }
     }
-    
+
+    //for blazor 
     public class UIComponent : ComponentBase
     {
         [Parameter]
@@ -50,7 +42,10 @@ namespace Application
         public IJSRuntime JsRuntime { get; set; } = default!;
 
         [Inject]
-        public IStringLocalizer<Global> T { get; set; } = default!;
+        public ISyncfusionStringLocalizer L { get; set; } = default!;
+
+        [Inject]
+        public IMediator Signal { get; set; } = default!;
 
         public bool IsArabic() => UserLanguage == SupportedLanguage.Arabic;
 

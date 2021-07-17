@@ -1,4 +1,13 @@
 using System;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MediatR;
+using System.Resources;
 
 namespace Khalifa.Framework
 {
@@ -10,8 +19,8 @@ namespace Khalifa.Framework
         public const int AllOptionValue = -1;
         public const short AllOptionValueShort = -1;
         public const string AllOptionValueString = "-1";
-        public const string ApiSessionHeader = "X-LMAP-UserSessionId";
-        public const string ApiSessionObject = "LMAP-API-Session-object";
+        public const string ApiSessionHeader = "X-TMALL-UserSessionId";
+        public const string ApiSessionObject = "TMALL-API-Session-object";
         public const int TrueValue = 1;
         public const int FalseValue = 0;
         public const string DefaultCountry = "EGY";
@@ -64,4 +73,73 @@ namespace Khalifa.Framework
             public const short MissedInterviewed = 205;
         }
     }
+
+    public enum SupportedLanguage
+    {
+        None,
+        Arabic,
+        English,
+        French
+    }
+
+    public static class SupportedLanguageExtensions
+    {
+        public static string Code(this SupportedLanguage self)
+        {
+            return self switch
+            {
+                SupportedLanguage.Arabic => "ar",
+                SupportedLanguage.English => "en-US",
+                _ => throw new ArgumentOutOfRangeException(),
+            };
+        }
+
+        public static SupportedLanguage ToSupportedLang(this string self)
+        {
+            return self switch
+            {
+                "ar" => SupportedLanguage.Arabic,
+                "en-US" => SupportedLanguage.English,
+                _ => throw new ArgumentOutOfRangeException(),
+            };
+        }
+    }
+  
+    ////for blazor 
+    //public class UIComponent : ComponentBase
+    //{
+    //    [Parameter]
+    //    public SupportedLanguage UserLanguage { get; set; }
+
+    //    [Inject]
+    //    public IJSRuntime JsRuntime { get; set; } = default!;
+
+    //    [Inject]
+    //    public IStringLocalizer<Global> T { get; set; } = default!;
+        
+    //    [Inject]
+    //    public ISyncfusionStringLocalizer L { get; set; } = default!;
+        
+    //    [Inject]
+    //    public IMediator Signal { get; set; } = default!;
+
+    //    public bool IsArabic() => UserLanguage == SupportedLanguage.Arabic;
+
+    //    public string? WhenCulture(string? nameArabic, string? nameEnglish)
+    //    {
+    //        if (IsArabic())
+    //            return !string.IsNullOrWhiteSpace(nameArabic) ? nameArabic : nameEnglish;
+    //        else
+    //            return !string.IsNullOrWhiteSpace(nameEnglish) ? nameEnglish : nameArabic;
+    //    }
+
+    //    public SupportedLanguage GetCurrentLanguage()
+    //    {
+    //        var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
+    //        return (currentCulture == "ar") ? SupportedLanguage.Arabic : SupportedLanguage.English;
+    //    }
+
+    //}
+
+
 }

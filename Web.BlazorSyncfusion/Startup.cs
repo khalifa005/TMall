@@ -15,6 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.BlazorSyncfusion.Data;
+using MediatR;
+using Application.MediatorHandlers.ProductHandlers;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Application.AppMappingProfiles;
 
 namespace Web.BlazorSyncfusion
 {
@@ -22,15 +27,23 @@ namespace Web.BlazorSyncfusion
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration _configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(GetProduct).Assembly);
+
+            services.AddDbContext<StoreContext>(options =>
+                options.UseSqlServer(_configuration.GetConnectionString("SqlServerConnection")));
+
+
+            //services.AddAutoMapper(typeof(MappingProfiles));//define where the assembles
+            services.AddAutoMapper(typeof(AppProfile));//define where the assembles
+
+
             services.AddSyncfusionBlazor();
             services.AddSingleton(typeof(ISyncfusionStringLocalizer), typeof(SyncfusionLocalizer));
             services.Configure<RequestLocalizationOptions>(options =>
@@ -52,7 +65,6 @@ namespace Web.BlazorSyncfusion
             services.AddRazorPages();
             services.AddSignalR(e => { e.MaximumReceiveMessageSize = 102400000; });
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

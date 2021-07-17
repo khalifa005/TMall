@@ -4980,4 +4980,13 @@
   <data name="Khalifa" xml:space="preserve">
     <value>Kholfaaa</value>
   </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Shop" xml:space="preserve">
+    <value />
+  </data>
 </root>

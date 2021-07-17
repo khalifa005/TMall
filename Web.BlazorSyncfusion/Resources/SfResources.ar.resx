@@ -4947,4 +4947,13 @@
   <data name="Khalifa" xml:space="preserve">
     <value>خليفة</value>
   </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Shop" xml:space="preserve">
+    <value>تسوق</value>
+  </data>
 </root>
