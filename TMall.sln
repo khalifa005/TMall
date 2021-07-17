@@ -9,15 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FD9B0088-97DF-4B20-BC08-C465B3F69E74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tmall.Migration", "Tmall.Migration\Tmall.Migration.csproj", "{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Khalifa.Framework", "Khalifa.Framework\Khalifa.Framework.csproj", "{3F858947-486C-45E4-98E9-FE9574B1748A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{681BB030-696B-4E53-8A42-43E77312B974}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.BlazorServer", "Web.BlazorServer\Web.BlazorServer.csproj", "{A5E3FE38-2F71-4742-B169-3CAFF8026977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.BlazorSyncfusion", "Web.BlazorSyncfusion\Web.BlazorSyncfusion.csproj", "{86C941A2-D762-4BF1-85CB-813757D1F2DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.BlazorSyncfusion", "Web.BlazorSyncfusion\Web.BlazorSyncfusion.csproj", "{86C941A2-D762-4BF1-85CB-813757D1F2DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,18 +63,6 @@ Global
 		{FD9B0088-97DF-4B20-BC08-C465B3F69E74}.Release|x64.Build.0 = Release|Any CPU
 		{FD9B0088-97DF-4B20-BC08-C465B3F69E74}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD9B0088-97DF-4B20-BC08-C465B3F69E74}.Release|x86.Build.0 = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|x64.Build.0 = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Debug|x86.Build.0 = Debug|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|x64.ActiveCfg = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|x64.Build.0 = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|x86.ActiveCfg = Release|Any CPU
-		{89C283BF-F0AC-4314-9B62-FD2536EEEA5E}.Release|x86.Build.0 = Release|Any CPU
 		{3F858947-486C-45E4-98E9-FE9574B1748A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F858947-486C-45E4-98E9-FE9574B1748A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F858947-486C-45E4-98E9-FE9574B1748A}.Debug|x64.ActiveCfg = Debug|Any CPU

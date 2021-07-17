@@ -19,16 +19,20 @@
     <PackageReference Include="Syncfusion.Blazor.Notifications" Version="19.2.0.46" />
     <PackageReference Include="Syncfusion.Blazor.Navigations" Version="19.2.0.46" />
 </ItemGroup>
+
+<ItemGroup>
+  <ProjectReference Include="..\Application\Application.csproj" />
+</ItemGroup>
 <ItemGroup>
     <Compile Update="Resources\SfResources.Designer.cs">
-      <DesignTime>True</DesignTime >
-      <AutoGen>True</AutoGen >
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>SfResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update ="Resources\SfResources.resx">
+    <EmbeddedResource Update="Resources\SfResources.resx">
        <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>SfResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

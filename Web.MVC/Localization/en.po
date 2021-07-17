@@ -1,2 +1,0 @@
-﻿msgid "hi"
-msgstr "hello"
