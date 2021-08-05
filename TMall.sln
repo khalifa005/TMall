@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.BlazorServer", "Web.Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.BlazorSyncfusion", "Web.BlazorSyncfusion\Web.BlazorSyncfusion.csproj", "{86C941A2-D762-4BF1-85CB-813757D1F2DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.AngularCore", "Web.AngularCore\Web.AngularCore.csproj", "{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{86C941A2-D762-4BF1-85CB-813757D1F2DC}.Release|x64.Build.0 = Release|Any CPU
 		{86C941A2-D762-4BF1-85CB-813757D1F2DC}.Release|x86.ActiveCfg = Release|Any CPU
 		{86C941A2-D762-4BF1-85CB-813757D1F2DC}.Release|x86.Build.0 = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|x64.Build.0 = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Debug|x86.Build.0 = Debug|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|x64.ActiveCfg = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|x64.Build.0 = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|x86.ActiveCfg = Release|Any CPU
+		{E06EA408-7A40-40EE-9C2C-07DB60CC5E36}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
