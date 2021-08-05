@@ -1,8 +1,14 @@
 <app-nav-bar></app-nav-bar>        
 
-<h1>Hellow khalifa</h1>      
 
 <div class="container mt-5">
-    <h2>Welcome to {{title}}</h2>
+<h1>Hello khalifa Welcome to {{title}}</h1>      
+
+<ul>
+    <li class="list-unstyled" *ngFor="let product of products">
+     {{product.name}}   
+    </li>
+</ul>
 </div>
+
 

@@ -18,7 +18,8 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
