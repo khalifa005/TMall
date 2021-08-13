@@ -10,7 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Web.BlazorServer.Data;
+using MediatR;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Application.AppMappingProfiles;
+using Application.MediatorHandlers.ProductHandlers;
 
 namespace Web.BlazorServer
 {
@@ -18,15 +22,24 @@ namespace Web.BlazorServer
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration _configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(GetProduct).Assembly);
+
+            services.AddDbContext<StoreContext>(options =>
+                options.UseSqlServer(_configuration.GetConnectionString("SqlServerConnection")), ServiceLifetime.Transient);
+
+
+            //services.AddAutoMapper(typeof(MappingProfiles));//define where the assembles
+            services.AddAutoMapper(typeof(AppProfile));//define where the assembles
+
             services.AddControllers();//bring some Parts from .Net mvc like Identity .. login
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");//put all translation inside this folder
@@ -34,12 +47,11 @@ namespace Web.BlazorServer
             
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
         }
 
         public RequestLocalizationOptions GetLocalizationOptions()
         {
-            var cultures = Configuration.GetSection("Cultures")
+            var cultures = _configuration.GetSection("Cultures")
                 .GetChildren().ToDictionary(x=> x.Key, x=> x.Value);
 
             var supportedCultures = cultures.Keys.ToArray();

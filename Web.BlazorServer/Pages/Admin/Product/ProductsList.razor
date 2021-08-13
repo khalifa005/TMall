@@ -1,0 +1,49 @@
+﻿@inherits CommonComponent
+@using Application.MediatorHandlers.ProductHandlers
+@using Application.AppDtos
+
+@implements IDisposable
+<div class="text-center">
+    <ul>
+
+        @foreach (var item in Products)
+        {
+            <li>@item.Name</li>
+        }
+    </ul>
+</div>
+@code {
+
+
+    public ProductFilterUI FilterUi { get; set; } = ProductFilterUI.Default();
+
+    public PagingInfo PagingInfo { get; set; }
+    public int PageSize { get; set; } = 5;
+    public int Page { get; set; } = 1;
+
+    public List<ProductAppDto> Products { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GetCurrentLanguage();
+
+        var isArabicLanguage = IsArabic();
+
+        var filter = FilterUi.GetFilter();
+        var sorter = ProductSorter.ByCreateDateDesc();
+
+        var response = await Signal.Send(new GetProductsWithPagining.Request(filter, sorter, Page, PageSize), cancellationToken: TokenSource.Token);
+
+        if (response.IsOK)
+        {
+            var test = response.TestData;
+            PagingInfo = response.Data.PagingInfo;
+            Products = response.Data.Items;
+        }
+    }
+
+    public void Dispose()
+    {
+        TokenSource.Cancel();
+    }
+}

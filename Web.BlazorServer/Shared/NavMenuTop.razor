@@ -1,0 +1,71 @@
+﻿@inherits UIComponent
+
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+    <img src="/images/logo.png" style="max-height: 70px;" alt="logo">
+
+    <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger;">
+        <a class="p-2 text-dark" href="#">@L["Home"]</a>
+        <a class="p-2 text-dark" href="#">@L["Shop"]</a>
+        <a class="p-2 text-dark" href="#">@L["Contact_Us"]</a>
+    </nav>
+
+    <div class="align-items-center d-flex">
+        <a class="position-relative">
+            <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
+            @if (IsArabic())
+            {
+                <div class="cart-number-ar">5</div>
+            }
+            else
+            {
+                <div class="cart-number">5</div>
+            }
+        </a>
+
+        <a class="btn btn-outline-secondary mr-2">Login</a>
+        <a class="btn btn-outline-secondary mr-2">Sign up</a>
+
+        <ChooseLanguage />
+    </div>
+</div>
+
+
+
+
+
+@code{
+    protected override void OnInitialized()
+    {
+        var test = IsArabic();
+    }
+
+}
+
+<style>
+    .cart-number {
+        min-width: 25px;
+        min-height: 25px;
+        border-radius: 50%;
+        font-size: 1em;
+        color: white;
+        text-align: center;
+        background: blue;
+        top: -12px;
+        right: 9px;
+        position: absolute;
+    }
+
+    .cart-number-ar {
+        min-width: 25px;
+        min-height: 25px;
+        border-radius: 50%;
+        font-size: 1em;
+        color: white;
+        text-align: center;
+        background: blue;
+        top: -12px;
+        right: -9px;
+        position: absolute;
+    }
+</style>

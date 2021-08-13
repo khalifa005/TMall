@@ -5,7 +5,6 @@
 {
     <form class="form-inline">
         <select class="form-control mr-2" @bind="selectedCulture">
-            <option>select</option>
             @foreach (var item in cultures)
             {
                 <option value="@item.Key">@item.Value</option>
