@@ -1,3 +1,5 @@
+import { IPagination } from './models/pagination';
+import { IProduct } from './models/product';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,12 +12,13 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'TMall';
 
-  products: any[];
+  // products: any[];
+  products: IProduct[];
 
   constructor(private http: HttpClient){}
   ngOnInit(): void {
     this.http.get('https://localhost:5001/api/products')
-    .subscribe((response: any) => {
+    .subscribe((response: IPagination) => {
       this.products = response.data;
       console.log(response);
     },
