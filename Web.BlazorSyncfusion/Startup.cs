@@ -37,7 +37,7 @@ namespace Web.BlazorSyncfusion
             services.AddMediatR(typeof(GetProduct).Assembly);
 
             services.AddDbContext<StoreContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("SqlServerConnection")));
+                options.UseSqlServer(_configuration.GetConnectionString("SqlServerConnection")), ServiceLifetime.Transient);
 
 
             //services.AddAutoMapper(typeof(MappingProfiles));//define where the assembles

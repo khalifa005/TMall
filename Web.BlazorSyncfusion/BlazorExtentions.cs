@@ -81,58 +81,58 @@ namespace Web.BlazorSyncfusion
         }
     }
 
-    public class ConfirmMessageContent : UIComponent
-    {
-        protected bool ShowConfirmation { get; set; }
+    //public class ConfirmMessageContent : UIComponent
+    //{
+    //    protected bool ShowConfirmation { get; set; }
 
-        [Parameter]
-        public string Title { get; set; } = string.Empty;
+    //    [Parameter]
+    //    public string Title { get; set; } = string.Empty;
 
-        [Parameter]
-        public string Message { get; set; } = string.Empty;
+    //    [Parameter]
+    //    public string Message { get; set; } = string.Empty;
 
-        public void Show()
-        {
-            ShowConfirmation = true;
-            StateHasChanged();
-        }
+    //    public void Show()
+    //    {
+    //        ShowConfirmation = true;
+    //        StateHasChanged();
+    //    }
 
-        [Parameter]
-        public EventCallback<bool> ConfirmationChanged { get; set; }
+    //    [Parameter]
+    //    public EventCallback<bool> ConfirmationChanged { get; set; }
 
-        protected async Task OnConfirmationChange(bool value)
-        {
-            ShowConfirmation = false;
-            await ConfirmationChanged.InvokeAsync(value);
-        }
-    }
+    //    protected async Task OnConfirmationChange(bool value)
+    //    {
+    //        ShowConfirmation = false;
+    //        await ConfirmationChanged.InvokeAsync(value);
+    //    }
+    //}
 
    
-    public record MessageContent(string Message, MessageType Type);
+    //public record MessageContent(string Message, MessageType Type);
 
-    public class MessageSlot
-    {
-        private ConcurrentQueue<MessageContent> Messages { get; set; } = new();
+    //public class MessageSlot
+    //{
+    //    private ConcurrentQueue<MessageContent> Messages { get; set; } = new();
 
-        public void Store(MessageContent content)
-        {
-            Messages.Enqueue(content);
-        }
+    //    public void Store(MessageContent content)
+    //    {
+    //        Messages.Enqueue(content);
+    //    }
 
-        public (bool, MessageContent?) Pickup()
-        {
-            Messages.TryDequeue(out var msg);
-            if (msg != null)
-                return (true, msg);
+    //    public (bool, MessageContent?) Pickup()
+    //    {
+    //        Messages.TryDequeue(out var msg);
+    //        if (msg != null)
+    //            return (true, msg);
 
-            return (false, null);
-        }
-    }
+    //        return (false, null);
+    //    }
+    //}
 
-    public class MessageDisplay
-    {
-        public string Content { get; set; } = string.Empty;
-    }
+    //public class MessageDisplay
+    //{
+    //    public string Content { get; set; } = string.Empty;
+    //}
 
     public record LogContent(object Message, LogType Type);
 
@@ -165,7 +165,7 @@ namespace Web.BlazorSyncfusion
         public IJSRuntime JsRuntime { get; set; } = default!;
 
         [Inject]
-        public ISyncfusionStringLocalizer L { get; set; } = default!;
+        public ISyncfusionStringLocalizer L { get; set; } = default!; //L for localizer
 
         [Inject]
         public IMediator Signal { get; set; } = default!;
@@ -183,6 +183,7 @@ namespace Web.BlazorSyncfusion
         public SupportedLanguage GetCurrentLanguage()
         {
             var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
+            UserLanguage = (currentCulture == "ar") ? SupportedLanguage.Arabic : SupportedLanguage.English;
             return (currentCulture == "ar") ? SupportedLanguage.Arabic : SupportedLanguage.English;
         }
 
@@ -193,8 +194,8 @@ namespace Web.BlazorSyncfusion
         [Inject]
         public IMediator Signal { get; set; } = default!;
 
-        [Inject]
-        protected MessageSlot Slot { get; set; } = default!;
+        //[Inject]
+        //protected MessageSlot Slot { get; set; } = default!;
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
@@ -254,7 +255,7 @@ namespace Web.BlazorSyncfusion
         //    return isAuthenticated;
         //}
 
-        public MessageDisplay Message = new();
+       // public MessageDisplay Message = new();
 
         public readonly CancellationTokenSource TokenSource = new();
 
@@ -262,44 +263,44 @@ namespace Web.BlazorSyncfusion
 
 
 
-        public void ShowMessage(string? msg, MessageType type)
-        {
-            if (string.IsNullOrWhiteSpace(msg))
-            {
-                //AlertRef?.Hide();
-                return;
-            }
+        //public void ShowMessage(string? msg, MessageType type)
+        //{
+        //    if (string.IsNullOrWhiteSpace(msg))
+        //    {
+        //        //AlertRef?.Hide();
+        //        return;
+        //    }
 
-            Message.Content = msg;
-           // Message.Color = MatchColor(type);
+        //    Message.Content = msg;
+        //   // Message.Color = MatchColor(type);
 
-           // AlertRef?.Show();
-        }
+        //   // AlertRef?.Show();
+        //}
 
-        public void StoreMessage(string? msg, MessageType type)
-        {
-            if (string.IsNullOrWhiteSpace(msg))
-                return;
+        //public void StoreMessage(string? msg, MessageType type)
+        //{
+        //    if (string.IsNullOrWhiteSpace(msg))
+        //        return;
 
-            var payload = new MessageContent(msg, type);
+        //    var payload = new MessageContent(msg, type);
 
-            Slot.Store(payload);
-        }
+        //    Slot.Store(payload);
+        //}
 
         /// <summary>
         /// Only call this in OnAfterRender. It won't work on OnInitialized or OnParameterSet
         /// </summary>
-        public void PickupMessage(bool stateHasChanged = false)
-        {
-            var (exists, message) = Slot.Pickup();
+        //public void PickupMessage(bool stateHasChanged = false)
+        //{
+        //    var (exists, message) = Slot.Pickup();
 
-            if (exists)
-            {
-                ShowMessage(message!.Message, message.Type);
-                if (stateHasChanged)
-                    StateHasChanged();
-            }
-        }
+        //    if (exists)
+        //    {
+        //        ShowMessage(message!.Message, message.Type);
+        //        if (stateHasChanged)
+        //            StateHasChanged();
+        //    }
+        //}
 
      
 
