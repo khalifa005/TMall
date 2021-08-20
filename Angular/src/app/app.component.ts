@@ -12,18 +12,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'TMall';
 
-  // products: any[];
-  products: IProduct[];
-
-  constructor(private http: HttpClient){}
-  ngOnInit(): void {
-    this.http.get('https://localhost:5001/api/products')
-    .subscribe((response: IPagination) => {
-      this.products = response.data;
-      console.log(response);
-    },
-     error => {
-      console.log(error);
-    });
-  }
+  constructor(){}
+  ngOnInit(): void {}
 }
