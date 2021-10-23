@@ -15,50 +15,9 @@ using AutoMapper;
 namespace Application.MediatorHandlers.ProductHandlers
 {
 
-    public class Getproducts
-    {
-        public class Request : IRequest<Response>
-        {
-        }
+   
 
-        public class Response : ApiResponse
-        {
-            public Response()
-            {
-
-            }
-            public IReadOnlyList<Product> Products { get; set; }
-
-            public Response(IReadOnlyList<Product> products)
-            {
-                Products = products;
-                StatusCode = (int)HttpStatusCode.OK;
-            }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly StoreContext _context;
-
-            public Handler(StoreContext context)
-            {
-                _context = context;
-            }
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            {
-
-                var proEntities = await _context.Products
-                .Include(p => p.ProductBrand)
-                .Include(p => p.ProductType)
-                .ToListAsync(cancellationToken);
-
-                return new Response(proEntities);
-            }
-        }
-    }
-
-    //for syncfusion component to call it automatically
+    //for using paiging with skip and take
     public class GetproductsByAdabtor
     {
         public record Request(int Skip, int Take) : IRequest<Response>
@@ -108,6 +67,8 @@ namespace Application.MediatorHandlers.ProductHandlers
             }
         }
     }
+
+    //advanced paging with mediator
     public class ProductFilterUI : FilterUI<ProductFilter>
     {
         public int BrandId { get; set; }
@@ -212,19 +173,17 @@ namespace Application.MediatorHandlers.ProductHandlers
         public class Response : ApiResponse
         {
             //we can introduce paging info and send it from the service rather IQuerySetPaging
-            public IQuerySetPaging<ProductAppDto> Data { get; set; }
-            public List<ProductAppDto> TestData { get; set; } = new();
+            public List<ProductAppDto> Data { get; set; } = new();
             public PagingInfo Info { get; set; }
-
+            //IQuerySetPaging<ProductAppDto> data
             public Response()
             {
             }
 
-            public Response(IQuerySetPaging<ProductAppDto> data, List<ProductAppDto> testData, PagingInfo info)
+            public Response(List<ProductAppDto> data, PagingInfo info)
             {
-                Data = data;
                 Info = info;
-                TestData = testData;
+                Data = data;
                 StatusCode = (int)HttpStatusCode.OK;
             }
         }
@@ -266,9 +225,9 @@ namespace Application.MediatorHandlers.ProductHandlers
                     var mappedProducts = _mapper.Map<List<Product>, List<ProductAppDto>>(result);
 
                     var resultResponse = QuerySet.Paging(mappedProducts, count).GetPagingInfo(request.Page, request.PageSize);
-                    var testResponse = resultResponse.Items;
+                    var responseData = resultResponse.Items;
                     var info = resultResponse.PagingInfo;
-                    return new Response(resultResponse, testResponse, info);
+                    return new Response(responseData, info);
                 }
                 catch (Exception ex)
                 {

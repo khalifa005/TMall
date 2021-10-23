@@ -43,50 +43,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("test/mediator/{id}")]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
-
-        public async Task<ActionResult<GetProduct.Response>> GetProductByIdMediator(int id)
-        {
-            return await Mediator.Send(new GetProduct.Request { Id = id });
-        }
-        
-        
-
-        [HttpGet("mediator/with-paging")]
-        [ProducesResponseType(typeof(GetProductsWithPagining.Response), StatusCodes.Status200OK)]
-        public async Task<GetProductsWithPagining.Response> GetProductsMediatorWithPaging(string name, string sort, int brandId, CancellationToken cancellation)
-        {
-            var filterUI = ProductFilterUI.Default();
-
-            filterUI.BrandId = brandId > 0 ? brandId : Config.AllOptionValueShort;
-            filterUI.ProductName = name;
-
-            var filter = filterUI.GetFilter();
-
-            var sorter = ProductSorter.ByCreateDateDesc();
-
-            if (!string.IsNullOrEmpty(sort))
-            {
-                switch (sort)
-                {
-                    case "priceAsc":
-                        sorter = ProductSorter.ByPricrAsc();
-                        break;
-
-                    case "priceDesc":
-                        sorter = ProductSorter.ByPricrDesc();
-                        break;
-
-                    default:
-                        sorter = ProductSorter.ByCreateDateDesc();
-                        break;
-                }
-            }
-
-            return await Mediator.Send(new GetProductsWithPagining.Request(filter, sorter, Page: 1, PageSize: 2), cancellation);
-        }
-
+       
 
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery]ProductSpectParams productParams) //[FromQuery] because we change it to object it goes and look fot it from the body and http get doesn't have a body
