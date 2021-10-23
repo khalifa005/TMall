@@ -1,5 +1,5 @@
+import { IProduct } from 'src/app/shared/models/product';
 import { IPagination } from './shared/models/pagination';
-import { IProduct } from './shared/models/product';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
   title = 'TMall';
+
+  product: IProduct;
 
   constructor(){}
   ngOnInit(): void {}
