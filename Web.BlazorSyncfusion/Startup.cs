@@ -20,6 +20,7 @@ using Application.MediatorHandlers.ProductHandlers;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Application.AppMappingProfiles;
+using Web.BlazorSyncfusion.SyncfusionDynamicServices;
 
 namespace Web.BlazorSyncfusion
 {
@@ -44,6 +45,7 @@ namespace Web.BlazorSyncfusion
             services.AddAutoMapper(typeof(AppProfile));//define where the assembles
 
 
+            services.AddScoped<GetProductBySfComponent>();
             services.AddSyncfusionBlazor();
             services.AddSingleton(typeof(ISyncfusionStringLocalizer), typeof(SyncfusionLocalizer));
             services.Configure<RequestLocalizationOptions>(options =>
@@ -76,6 +78,7 @@ namespace Web.BlazorSyncfusion
             // Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Add your license key here");
 
             app.UseRequestLocalization(app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

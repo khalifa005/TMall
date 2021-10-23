@@ -58,6 +58,56 @@ namespace Application.MediatorHandlers.ProductHandlers
         }
     }
 
+    //for syncfusion component to call it automatically
+    public class GetproductsByAdabtor
+    {
+        public record Request(int Skip, int Take) : IRequest<Response>
+        {
+
+        }
+
+        public class Response : ApiResponse
+        {
+            public Response()
+            {
+
+            }
+            public IReadOnlyList<ProductAppDto> Products { get; set; }
+            public int TotalItem { get; set; }
+
+            public Response(IReadOnlyList<ProductAppDto> products, int totalItem)
+            {
+                Products = products;
+                TotalItem = totalItem;
+                StatusCode = (int)HttpStatusCode.OK;
+            }
+        }
+
+        public class Handler : IRequestHandler<Request, Response>
+        {
+            private readonly StoreContext _context;
+            private readonly IMapper _mapper;
+            public Handler(StoreContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            {
+
+                var proEntities = await _context.Products.Skip(request.Skip).Take(request.Take)
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+                .ToListAsync(cancellationToken);
+
+                var totalItems = await _context.Products.CountAsync(cancellationToken);
+
+                var mappedProducts = _mapper.Map<List<Product>, List<ProductAppDto>>(proEntities);
+                return new Response(mappedProducts, totalItems);
+            }
+        }
+    }
     public class ProductFilterUI : FilterUI<ProductFilter>
     {
         public int BrandId { get; set; }

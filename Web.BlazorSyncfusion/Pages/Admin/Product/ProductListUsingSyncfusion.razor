@@ -3,7 +3,14 @@
 @using Application.MediatorHandlers.ProductHandlers
 @using Application.AppDtos
 @using Core.Entities
+@using Syncfusion.Blazor.Spinner
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Data
+@using Web.BlazorSyncfusion.SyncfusionDynamicServices
+@using Syncfusion.Blazor.DropDowns
 @implements IDisposable
+
+<SfSpinner @bind-Visible="@SpinnerVisible" Label="Data loading..." Size="50" Type="SpinnerType.Bootstrap4"></SfSpinner>
 
 
 @if (Products.Count > 0)
@@ -11,15 +18,19 @@
     <div class="col-lg-12 control-section">
         <div class="content-wrapper">
             <div class="row">
-              
+
                 <SfGrid @ref="DefaultGrid"
-                        DataSource="@Products"
+                        TValue="ProductAppDto"
                         AllowPaging="true"
                         AllowSorting="true"
                         AllowFiltering="true"
                         AllowPdfExport="true"
                         Toolbar="@(new List<string>() { "Grid_excelexport" })" AllowExcelExport="true">
-                    <GridEvents OnToolbarClick="ToolbarClickHandler"  TValue="ProductAppDto"></GridEvents>
+                    <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="ProductAppDto"></GridEvents>
+
+                    <SfDataManager Adaptor="Adaptors.CustomAdaptor" AdaptorInstance="@typeof(GetProductBySfComponent)">
+                    </SfDataManager>
+
                     <GridPageSettings PageSize="5"></GridPageSettings>
 
                     <GridColumns>
@@ -37,6 +48,33 @@
                     </GridColumns>
 
                 </SfGrid>
+
+                @*<SfGrid @ref="DefaultGrid"
+                        DataSource="@Products"
+                        AllowPaging="true"
+                        AllowSorting="true"
+                        AllowFiltering="true"
+                        AllowPdfExport="true"
+                        Toolbar="@(new List<string>() { "Grid_excelexport" })" AllowExcelExport="true">
+                    <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="ProductAppDto"></GridEvents>
+
+                    <GridPageSettings PageSize="5" PageSizes="@pagerDropdown" PageCount="3"></GridPageSettings>
+
+                    <GridColumns>
+                        <GridColumn Field="@nameof(Product.Id)"
+                                    HeaderText="@L.GetText("Shop")"></GridColumn>
+
+                        <GridColumn Field="@nameof(Product.Name)"
+                                    HeaderText="@Product.Name"></GridColumn>
+
+                        <GridColumn Field="@nameof(Product.Price)"
+                                    Format="C2"></GridColumn>
+
+                        <GridColumn Field="@nameof(Product.ProductType)"
+                                    HeaderText="@Product.ProductType"></GridColumn>
+                    </GridColumns>
+
+                </SfGrid>*@
             </div>
         </div>
     </div>
@@ -46,16 +84,23 @@
     public ProductFilterUI FilterUi { get; set; } = ProductFilterUI.Default();
 
     public PagingInfo PagingInfo { get; set; }
-    public int PageSize { get; set; } = 50;
+    public int PageSize { get; set; } = 10;
     public int Page { get; set; } = 1;
 
     public List<ProductAppDto> Products { get; set; } = new();
     public ProductAppDto Product { get; set; } = new();
 
+    public bool SpinnerVisible { get; set; } = true;
+
+    string[] pagerDropdown = new string[] { "All", "5", "10", "15", "20" };
+
+    public int DropVal { get; set; } = 1;
+
     protected override async Task OnInitializedAsync()
     {
         GetCurrentLanguage();
 
+        //await Task.Delay(3000); to test snipper
         var isArabicLanguage = IsArabic();
 
         var filter = FilterUi.GetFilter();
@@ -69,6 +114,10 @@
             PagingInfo = response.Data.PagingInfo;
             Products = response.Data.Items;
         }
+
+        SpinnerVisible = false;
+        
+        StateHasChanged();
     }
 
     private SfGrid<ProductAppDto> DefaultGrid;
@@ -80,7 +129,7 @@
         await this.DefaultGrid.ExcelExport(ExcelProperties);
         await this.DefaultGrid.PdfExport();
     }
-    
+
     public void Dispose()
     {
         TokenSource.Cancel();

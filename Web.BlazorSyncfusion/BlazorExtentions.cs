@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using System.Resources;
+using Application.MediatorHandlers;
 
 
 using Khalifa.Framework;
@@ -16,9 +17,13 @@ using Microsoft.AspNetCore.Components.Forms;
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Threading;
+using Syncfusion.Blazor.Data;
+using Application.MediatorHandlers.ProductHandlers;
 
 namespace Web.BlazorSyncfusion
 {
+   
+
     public enum ComponentInputMode
     {
         Create,
@@ -141,6 +146,8 @@ namespace Web.BlazorSyncfusion
         // To get the locale key from mapped resources file
         public string GetText(string key)
         {
+            var test = key;
+            var test2 = this.ResourceManager.GetString(key);
             return this.ResourceManager.GetString(key);
         }
 
