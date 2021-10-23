@@ -13,6 +13,7 @@ namespace Khalifa.Framework
 {
     public static class Config
     {
+        public const short GMT = 2;//How many hours from GMT
         public const int CommonPageSize = 100;
         public const int SmallCommonPageSize = 10;
         public const int NoneOptionValue = -2;
@@ -63,7 +64,7 @@ namespace Khalifa.Framework
         }
 
        
-        public static class NominationStatus
+        public static class ProductStatus
         {
             public const short Nominated = 200;
             public const short Interviewed = 201;
@@ -104,42 +105,15 @@ namespace Khalifa.Framework
             };
         }
     }
-  
-    ////for blazor 
-    //public class UIComponent : ComponentBase
-    //{
-    //    [Parameter]
-    //    public SupportedLanguage UserLanguage { get; set; }
 
-    //    [Inject]
-    //    public IJSRuntime JsRuntime { get; set; } = default!;
+    public static class Stamp
+    {
+        public static DateTime DateTime() => global::System.DateTime.UtcNow;
 
-    //    [Inject]
-    //    public IStringLocalizer<Global> T { get; set; } = default!;
-        
-    //    [Inject]
-    //    public ISyncfusionStringLocalizer L { get; set; } = default!;
-        
-    //    [Inject]
-    //    public IMediator Signal { get; set; } = default!;
+        public static string ETag() => Guid.NewGuid().ToString();
 
-    //    public bool IsArabic() => UserLanguage == SupportedLanguage.Arabic;
+        public static string System() => "System";
 
-    //    public string? WhenCulture(string? nameArabic, string? nameEnglish)
-    //    {
-    //        if (IsArabic())
-    //            return !string.IsNullOrWhiteSpace(nameArabic) ? nameArabic : nameEnglish;
-    //        else
-    //            return !string.IsNullOrWhiteSpace(nameEnglish) ? nameEnglish : nameArabic;
-    //    }
-
-    //    public SupportedLanguage GetCurrentLanguage()
-    //    {
-    //        var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
-    //        return (currentCulture == "ar") ? SupportedLanguage.Arabic : SupportedLanguage.English;
-    //    }
-
-    //}
-
-
+        public static Guid NewGuid() => Guid.NewGuid();
+    }
 }
