@@ -36,9 +36,8 @@
 
         if (response.IsOK)
         {
-            var test = response.TestData;
-            PagingInfo = response.Data.PagingInfo;
-            Products = response.Data.Items;
+            PagingInfo = response.Info;
+            Products = response.Data;
         }
     }
 
