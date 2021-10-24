@@ -2,7 +2,7 @@ import { IBrand, IProductType } from './../shared/models/Lookup';
 import { IPagination } from './../shared/models/pagination';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators'; 
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 })
 
 export class ShopService {
- baseUrl = 'https://localhost:5001/api/';
+  baseUrl = 'https://localhost:5001/api/';
+ // = 'https://localhost:44398/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -19,19 +20,26 @@ export class ShopService {
     let params = new HttpParams();
 
     if (brandId){
-      params.append('brandId', brandId.toString());
+      // params.set('brandId', brandId.toString());
     }
 
     if (typeId){
-      params.append('typeId', typeId.toString());
+      // params.set('typeId', typeId.toString());
     }
 
-    return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
+    console.log(typeId);
+    console.log(brandId);
+
+    const paramss = new HttpParams().set('brandId', '1');
+
+    return this.http.get<IPagination>(this.baseUrl + 'products?brandid=1')
     .pipe(
       map(response => {
-        return response.body;
+        console.log(response);
+        return response;
       })
     );
+
     //    return this.http.get<IPagination>(this.baseUrl + 'products' )
     // this will gives us a response body and
     // the above will return http response => observe: 'response', instead of the body of the response

@@ -55,16 +55,17 @@ export class ShopComponent implements OnInit {
   }, error => {
     console.log(error);
   });
+
 }
 
-onBrandSelected(brandId: number){
+ onBrandSelected(brandId: number){
 
 this.brandIdSelected = brandId ;
 this.getProducts();
 }
 
-onTypeSelected(brandId: number){
-this.brandIdSelected = brandId ;
+ onTypeSelected(typeId: number){
+this.typeIdSelected = typeId ;
 this.getProducts();
 }
 
