@@ -20,19 +20,18 @@ export class ShopService {
     let params = new HttpParams();
 
     if (brandId){
-      // params.set('brandId', brandId.toString());
+      params = params.append('brandId', brandId.toString());
     }
 
     if (typeId){
-      // params.set('typeId', typeId.toString());
+      params = params.append('typeId', typeId.toString());
     }
 
     console.log(typeId);
     console.log(brandId);
 
-    const paramss = new HttpParams().set('brandId', '1');
 
-    return this.http.get<IPagination>(this.baseUrl + 'products?brandid=1')
+    return this.http.get<IPagination>(this.baseUrl + 'products' , { params })
     .pipe(
       map(response => {
         console.log(response);
