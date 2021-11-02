@@ -15,9 +15,13 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(brandId?: number, typeId?: number) {
+  getProducts(brandId?: number, typeId?: number, sort?: string) {
     // tslint:disable-next-line:prefer-const
     let params = new HttpParams();
+
+    if (sort){
+      params = params.append('sort', sort);
+    }
 
     if (brandId){
       params = params.append('brandId', brandId.toString());
